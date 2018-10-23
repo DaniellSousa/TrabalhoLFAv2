@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="v2.trabalho.lfa.trabalho_lfav2.MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/layoutEstados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="2dp">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.04" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:text="Q"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.08" />
+
+        <EditText
+            android:id="@+id/etEstados"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="45dp"
+            android:text="Estados separados por vírgula (ex: 0,1,2)"
+            android:layout_gravity="center_vertical"
+            android:textSize="10sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.08" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutSimbolosEntrada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="2dp">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.04" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:text="E"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.08" />
+
+        <EditText
+            android:id="@+id/etSimbolosEntrada"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="45dp"
+            android:text="Símbolos de entrada separados por vírgula (ex: 0,1,2)"
+            android:layout_gravity="center_vertical"
+            android:textSize="10sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.08" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutSimbolosCompleto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="2dp">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.04" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:text="R"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.08" />
+
+        <EditText
+            android:id="@+id/etSimbolosCompleto"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="45dp"
+            android:text="Símbolos completos separados por vírgula (ex: 0,1,2)"
+            android:layout_gravity="center_vertical"
+            android:textSize="10sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.08" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutEstadosInicialFinal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="2dp">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.8" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:text="Qo"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.1" />
+
+        <EditText
+            android:id="@+id/etEstadoInicial"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="45dp"
+            android:text="Estado inicial (ex: 0)"
+            android:layout_gravity="center_vertical"
+            android:textSize="10sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.2" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:text="F"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.1" />
+
+        <EditText
+            android:id="@+id/etEstadoFinal"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="45dp"
+            android:text="Estados finais (ex: 0, 2)"
+            android:layout_gravity="center_vertical"
+            android:textSize="10sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.08" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutFuncoes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="2dp">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.04" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:text="S"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.08" />
+
+        <EditText
+            android:id="@+id/etFuncoes"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="120dp"
+            android:text="Exemplos: ..."
+            android:gravity="start"
+            android:layout_gravity="center_vertical"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.08" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnValidarCampos"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Validar Campos"/>
+
+    <LinearLayout
+        android:id="@+id/layoutTestes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="2dp">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:text="Teste"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.08" />
+
+        <EditText
+            android:id="@+id/etPalavraTeste"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="45dp"
+            android:text=""
+            android:layout_gravity="center_vertical"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.09" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:text="Saída"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.08" />
+
+        <EditText
+            android:id="@+id/etSaidaTeste"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="45dp"
+            android:text=""
+            android:layout_gravity="center_vertical"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.08" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnTestarPalavra"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Testar Palavra"/>
+
+</LinearLayout>
