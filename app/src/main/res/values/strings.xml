@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Trabalho_LFAv2</string>
+    <string name="msg_estados_vazio">Digite os estados.</string>
+    <string name="msg_estados_invalido">Estados inválidos, verifique.</string>
+    <string name="msg_simbolos_entrada_vazio">Digite os símbolos de entrada.</string>
+    <string name="msg_simbolos_entrada_invalidos">Símbolos de entrada inválidos.</string>
+    <string name="msg_simbolos_completo_vazio">Digite o conjunto completo de símbolos.</string>
+    <string name="msg_simbolos_completo_invalido">Conjunto completo de símbolos inválido.</string>
+    <string name="msg_estado_inicial_vazio">Digite o estado inicial.</string>
+    <string name="msg_estados_finais_vazio">Digite os estados finais.</string>
+    <string name="msg_estados_finais_invalidos">Estados finais inválidos.</string>
+    <string name="msg_funcoes_vazio">Digite as funcções</string>
 </resources>

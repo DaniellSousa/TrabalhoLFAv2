@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="v2.trabalho.lfa.trabalho_lfav2.MainActivity">
+    android:layout_height="wrap_content">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/layoutEstados"
@@ -189,7 +192,7 @@
             android:layout_weight="0.1" />
 
         <EditText
-            android:id="@+id/etEstadoFinal"
+            android:id="@+id/etEstadosFinais"
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="45dp"
@@ -330,3 +333,4 @@
         android:text="Testar Palavra"/>
 
 </LinearLayout>
+</ScrollView>
