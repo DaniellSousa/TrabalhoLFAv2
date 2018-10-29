@@ -1,5 +1,6 @@
 package v2.trabalho.lfa.trabalho_lfav2;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        createProgressDialog();
 
         layoutEstados = (LinearLayout) findViewById(R.id.layoutEstados);
         etEstados = (EditText) findViewById(R.id.etEstados);
@@ -97,6 +102,9 @@ public class MainActivity extends AppCompatActivity {
                 }else if (etFuncoes.getText().toString().trim().length() == 0) {
                     showMensagem(R.string.msg_funcoes_vazio);
                 }else {
+                    btnTestarPalavra.setVisibility(View.VISIBLE);
+                    layoutTestes.setVisibility(View.VISIBLE);
+
                     TaskSendFields task = new TaskSendFields();
                     task.execute();
                 }
@@ -107,11 +115,42 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class TaskSendFields extends AsyncTask<Void, Void, Void> {
-
-
         @Override
         protected Void doInBackground(Void... voids) {
+            Gson gsonConvert = new Gson();
+            try {
+                String json = "{";
+                json += "\"estados\":" + etEstados.getText().toString().trim() + "\",";
+                json += "\"simbolosEntrada\":" + etSimbolosEntrada.getText().toString().trim() + "\",";
+                json += "\"simbolosCompleto\":" + etSimbolosCompleto.getText().toString().trim() + "\",";
+                json += "\"estadoInicial\":" + etEstadoInicial.getText().toString().trim() + "\",";
+                json += "\"estadosFinais\":" + etEstadosFinais.getText().toString().trim() + "\",";
+                json += "\"palavraTeste\":" + etEstadosFinais.getText().toString().trim() + "\",";
+                json += "\"funcoes\":" + etFuncoes.getText().toString().trim() + "\"}";
+
+                String responseString = MakeRequest.runWithPost(json , "http://127.0.0.1:8000/verify_mt/");
+
+                final Retorno retorno = gsonConvert.fromJson(responseString, Retorno.class);
+
+                if (retorno.getStatus() == 200) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            etSaidaTeste.setText(retorno.getSaida());
+                        }
+                    });
+
+                }else {
+                    showMensagem(R.string.erro_interno);
+                }
+
+            }catch (Exception e) {
+                showMensagem(R.string.erro_interno);
+                e.printStackTrace();
+            }
             return null;
         }
     }
@@ -156,6 +195,27 @@ public class MainActivity extends AppCompatActivity {
     void cancelProgressDialog() {
         if (this.progress.isShowing()) {
             this.progress.dismiss();
+        }
+    }
+
+    private class Retorno {
+        private int status;
+        private int saida;
+
+        public int getStatus() {
+            return status;
+        }
+
+        public void setStatus(int status) {
+            this.status = status;
+        }
+
+        public int getSaida() {
+            return saida;
+        }
+
+        public void setSaida(int saida) {
+            this.saida = saida;
         }
     }
 }
