@@ -42,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="45dp"
-            android:text="Estados separados por vírgula (ex: 0,1,2)"
+            android:hint="Estados separados por vírgula (ex: 0,1,2)"
             android:layout_gravity="center_vertical"
             android:textSize="10sp" />
 
@@ -84,7 +84,7 @@
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="45dp"
-            android:text="Símbolos de entrada separados por vírgula (ex: 0,1,2)"
+            android:hint="Símbolos de entrada separados por vírgula (ex: 0,1,2)"
             android:layout_gravity="center_vertical"
             android:textSize="10sp" />
 
@@ -126,7 +126,7 @@
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="45dp"
-            android:text="Símbolos completos separados por vírgula (ex: 0,1,2)"
+            android:hint="Símbolos completos separados por vírgula (ex: 0,1,2)"
             android:layout_gravity="center_vertical"
             android:textSize="10sp" />
 
@@ -168,7 +168,7 @@
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="45dp"
-            android:text="Estado inicial (ex: 0)"
+            android:hint="Estado inicial (ex: 0)"
             android:layout_gravity="center_vertical"
             android:textSize="10sp" />
 
@@ -196,7 +196,7 @@
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="45dp"
-            android:text="Estados finais (ex: 0, 2)"
+            android:hint="Estados finais (ex: 0, 2)"
             android:layout_gravity="center_vertical"
             android:textSize="10sp" />
 
@@ -238,7 +238,7 @@
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="120dp"
-            android:text="Exemplos: ..."
+            android:hint="Funções. Ex.: 0,$-0,$,R;q0,$-q0,1,R;"
             android:gravity="start"
             android:layout_gravity="center_vertical"
             android:textSize="12sp" />

@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
         createProgressDialog();
 
+        setValuesSaved();
+
         layoutEstados = (LinearLayout) findViewById(R.id.layoutEstados);
         etEstados = (EditText) findViewById(R.id.etEstados);
 
@@ -105,35 +107,100 @@ public class MainActivity extends AppCompatActivity {
                     btnTestarPalavra.setVisibility(View.VISIBLE);
                     layoutTestes.setVisibility(View.VISIBLE);
 
+                    saveStateFields();
+                }
+            }
+        });
+
+        btnTestarPalavra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (etPalavraTeste.getText().toString().trim().length() == 0) {
+                    showMensagem(R.string.msg_palavra_teste_vazio);
+                }else {
                     TaskSendFields task = new TaskSendFields();
                     task.execute();
                 }
+            }
+        });
+    }
+
+    void saveStateFields() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Cache.saveObjectCache(MainActivity.this, "estados", etEstados.getText().toString().trim());
+                    Cache.saveObjectCache(MainActivity.this, "simbolosEntrada", etSimbolosEntrada.getText().toString().trim());
+                    Cache.saveObjectCache(MainActivity.this, "simbolosCompleto", etSimbolosCompleto.getText().toString().trim());
+                    Cache.saveObjectCache(MainActivity.this, "estadoInicial", etEstadoInicial.getText().toString().trim());
+                    Cache.saveObjectCache(MainActivity.this, "estadosFinais", etEstadosFinais.getText().toString().trim());
+                    Cache.saveObjectCache(MainActivity.this, "funcoes", etFuncoes.getText().toString().trim());
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+    }
+
+    void setValuesSaved() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+
+                    String estados = (String) Cache.getAtCache(MainActivity.this, "estados");
+                    etEstados.setText(estados);
+
+                    String simbolosEntrada = (String) Cache.getAtCache(MainActivity.this, "simbolosEntrada");
+                    etSimbolosEntrada.setText(simbolosEntrada);
+
+                    String simbolosCompleto = (String) Cache.getAtCache(MainActivity.this, "simbolosCompleto");
+                    etSimbolosCompleto.setText(simbolosCompleto);
+
+                    String estadoInicial = (String) Cache.getAtCache(MainActivity.this, "estadoInicial");
+                    etEstadoInicial.setText(estadoInicial);
+
+                    String estadosFinais = (String) Cache.getAtCache(MainActivity.this, "estadosFinais");
+                    etEstadosFinais.setText(estadosFinais);
+
+                    String funcoes = (String) Cache.getAtCache(MainActivity.this, "funcoes");
+                    etFuncoes.setText(funcoes);
+
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             }
-
-        });
-
+        }).start();
     }
 
     @SuppressLint("StaticFieldLeak")
     private class TaskSendFields extends AsyncTask<Void, Void, Void> {
+
         @Override
         protected Void doInBackground(Void... voids) {
+            showProgressDialog();
             Gson gsonConvert = new Gson();
             try {
                 String json = "{";
-                json += "\"estados\":" + etEstados.getText().toString().trim() + "\",";
-                json += "\"simbolosEntrada\":" + etSimbolosEntrada.getText().toString().trim() + "\",";
-                json += "\"simbolosCompleto\":" + etSimbolosCompleto.getText().toString().trim() + "\",";
-                json += "\"estadoInicial\":" + etEstadoInicial.getText().toString().trim() + "\",";
-                json += "\"estadosFinais\":" + etEstadosFinais.getText().toString().trim() + "\",";
-                json += "\"palavraTeste\":" + etEstadosFinais.getText().toString().trim() + "\",";
-                json += "\"funcoes\":" + etFuncoes.getText().toString().trim() + "\"}";
+                json += "\"estados\":\"" + etEstados.getText().toString().trim() + "\",";
+                json += "\"simbolosEntrada\":\"" + etSimbolosEntrada.getText().toString().trim() + "\",";
+                json += "\"simbolosCompleto\":\"" + etSimbolosCompleto.getText().toString().trim() + "\",";
+                json += "\"estadoInicial\":\"" + etEstadoInicial.getText().toString().trim() + "\",";
+                json += "\"estadosFinais\":\"" + etEstadosFinais.getText().toString().trim() + "\",";
+                json += "\"palavraTeste\":\"" + etEstadosFinais.getText().toString().trim() + "\",";
+                json += "\"funcoes\":\"" + etFuncoes.getText().toString().trim() + "\"}";
 
-                String responseString = MakeRequest.runWithPost(json , "http://127.0.0.1:8000/verify_mt/");
+                String responseString = MakeRequest.runWithPost("https://00abbdb3.ngrok.io/verify_mt/", json);
 
                 final Retorno retorno = gsonConvert.fromJson(responseString, Retorno.class);
 
+                cancelProgressDialog();
                 if (retorno.getStatus() == 200) {
 
                     runOnUiThread(new Runnable() {
@@ -148,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }catch (Exception e) {
+                cancelProgressDialog();
                 showMensagem(R.string.erro_interno);
                 e.printStackTrace();
             }
@@ -162,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-                builder.setTitle(0);
+                builder.setTitle("");
                 builder.setMessage(mensagem);
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -180,22 +248,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void createProgressDialog() {
-        progress = new ProgressDialog(this);
-        progress.setCanceledOnTouchOutside(true);
-        progress.setCancelable(false);
-        progress.setTitle("Carregando...");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progress = new ProgressDialog(MainActivity.this);
+                progress.setCanceledOnTouchOutside(true);
+                progress.setCancelable(false);
+                progress.setTitle("Carregando...");
+            }
+        });
     }
 
     void showProgressDialog() {
-        if (!this.progress.isShowing()) {
-            this.progress.show();
-        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (!progress.isShowing()) {
+                    progress.show();
+                }
+            }
+        });
+
     }
 
     void cancelProgressDialog() {
-        if (this.progress.isShowing()) {
-            this.progress.dismiss();
-        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (progress.isShowing()) {
+                    progress.dismiss();
+                }
+            }
+        });
     }
 
     private class Retorno {
