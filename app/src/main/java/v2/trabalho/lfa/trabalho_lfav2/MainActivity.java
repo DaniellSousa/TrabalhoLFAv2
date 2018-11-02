@@ -196,19 +196,28 @@ public class MainActivity extends AppCompatActivity {
                 json += "\"palavraTeste\":\"" + etEstadosFinais.getText().toString().trim() + "\",";
                 json += "\"funcoes\":\"" + etFuncoes.getText().toString().trim() + "\"}";
 
-                String responseString = MakeRequest.runWithPost("https://00abbdb3.ngrok.io/verify_mt/", json);
+                String responseString = MakeRequest.runWithPost("https://59749bbd.ngrok.io/verify_mt/", json);
 
                 final Retorno retorno = gsonConvert.fromJson(responseString, Retorno.class);
 
                 cancelProgressDialog();
                 if (retorno.getStatus() == 200) {
 
-                    runOnUiThread(new Runnable() {
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            etSaidaTeste.setText(retorno.getSaida());
+//                        }
+//                    });
+
+                    new Thread(new Runnable() {
+
                         @Override
                         public void run() {
-                            etSaidaTeste.setText(retorno.getSaida());
+                            etSaidaTeste.setText(""+retorno.getSaida());
                         }
-                    });
+
+                    }).start();
 
                 }else {
                     showMensagem(R.string.erro_interno);
